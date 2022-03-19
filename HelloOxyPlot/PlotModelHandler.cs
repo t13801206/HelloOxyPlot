@@ -35,15 +35,27 @@ namespace HelloOxyPlot
                 Color = OxyColor.FromArgb(0xff, 0xff, 0, 0),     // 上の線の色
                 StrokeThickness = 2,                             // 線の太さ
             };
-
+            
             // 点を追加
             _series.Points.Add(new DataPoint(10, 123.4));
+            
+            var seriesConst = new LineSeries
+            {
+                Title = "threshold",
+                InterpolationAlgorithm = InterpolationAlgorithms.UniformCatmullRomSpline,
+                Color = OxyColor.FromRgb(128, 200, 0),
+                StrokeThickness = 3,
+            };
+            seriesConst.Points.Add(new DataPoint(0, 3800));
+            seriesConst.Points.Add(new DataPoint(1024, 3800));
+
 
             _model = new PlotModel();
             _model.Title = "グラフのタイトル";
             _model.Axes.Add(XAxis);
             _model.Axes.Add(YAxis);
             _model.Series.Add(_series);
+            _model.Series.Add(seriesConst);
         }
 
         internal PlotModel Create() => _model;
